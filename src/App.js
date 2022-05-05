@@ -2,6 +2,7 @@ import { useReducer, useRef } from "react";
 import "./App.css";
 import reducer from "./reducer";
 import ToDoList from './components/ToDoList';
+import { v4 as uuidv4 } from 'uuid';
 
 
 function App() {
@@ -22,13 +23,27 @@ function App() {
       }
     })
   }
+  const handleToDoAdd = () => {
+    const task = todoTaskRef.current.value;
+    if (task === "") {
+      return;
+    } else {
+      dispatch({
+        type: "set_items",
+        payload: {
+          items: [{ id: uuidv4(), task, completed: false }]
+        },
+      })
+      todoTaskRef.current.value = "";
+    }
+  };
 
   return (
     <div className='container'>
     <div className=' task-form'>
       <input type="text" ref={todoTaskRef} placeholder="New To Do" className='task-form__input input-container' />
       <div className='btns-container'>
-        <button  className='button'>Add</button>
+        <button onClick={handleToDoAdd} className='button'>Add</button>
         <button  className='button'>Remove Completed</button>
       </div>
     </div>
