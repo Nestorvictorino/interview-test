@@ -1,33 +1,29 @@
-import { useEffect, useReducer } from "react";
+import { useReducer, useRef } from "react";
 import "./App.css";
 import reducer from "./reducer";
+import ToDoList from './components/ToDoList';
 
-const DATA = ["item 1", "item 2", "item 3"];
-
-const initialState = {
-  items: [],
-};
 
 function App() {
+  const initialState = {
+    items: [{ id: 1, task: "Task 1", completed: false }],
+  };
   const [state, dispatch] = useReducer(reducer, initialState);
+  const todoTaskRef = useRef();
 
-  useEffect(() => {
-    dispatch({
-      type: "set_items",
-      payload: {
-        items: DATA,
-      },
-    });
-  });
 
   return (
-    <div className="App">
-      <ul className="items-container">
-        {state.items.map((item) => (
-          <li>{item}</li>
-        ))}
-      </ul>
+    <div className='container'>
+    <div className=' task-form'>
+      <input type="text" ref={todoTaskRef} placeholder="New To Do" className='task-form__input input-container' />
+      <div className='btns-container'>
+        <button  className='button'>Add</button>
+        <button  className='button'>Remove Completed</button>
+      </div>
     </div>
+    <ToDoList/>
+ 
+  </div>
   );
 }
 
