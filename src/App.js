@@ -38,13 +38,23 @@ function App() {
     }
   };
 
+  const handleToDoQuit = () => {
+    const newTodos = state.items.filter((todo) => !todo.completed);
+    dispatch({
+      type: "delete_items",
+      payload: {
+        items: newTodos
+      },
+    })
+  };
+
   return (
     <div className='container'>
     <div className=' task-form'>
       <input type="text" ref={todoTaskRef} placeholder="New To Do" className='task-form__input input-container' />
       <div className='btns-container'>
         <button onClick={handleToDoAdd} className='button'>Add</button>
-        <button  className='button'>Remove Completed</button>
+        <button onClick={handleToDoQuit} className='button'>Remove Completed</button>
       </div>
     </div>
     <ToDoList todos={state.items} toggleTodo={toggleTodo}/>

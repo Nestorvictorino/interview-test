@@ -12,6 +12,13 @@ export default function redurer(state, action) {
         items: state.items,
       };  
     }
+    case "delete_items": {
+      const newTodos = state.items.filter((todo) => !todo.completed);
+      return {
+        ...state,
+        items: newTodos,
+      };  
+    }
     default: {
       return state;
     }
