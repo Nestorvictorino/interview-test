@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const initialState = {
-    items: [{ id: 1, task: "Task 1", completed: false }],
+    items: [],
   };
   const [state, dispatch] = useReducer(reducer, initialState);
   const todoTaskRef = useRef();
@@ -50,16 +50,19 @@ function App() {
 
   return (
     <div className='container'>
-    <div className=' task-form'>
-      <input type="text" ref={todoTaskRef} placeholder="New To Do" className='task-form__input input-container' />
-      <div className='btns-container'>
-        <button onClick={handleToDoAdd} className='button'>Add</button>
-        <button onClick={handleToDoQuit} className='button'>Remove Completed</button>
+      <div className=' task-form'>
+        <input type="text" ref={todoTaskRef} placeholder="New To Do" className='task-form__input input-container' />
+        <div className='btns-container'>
+          <button onClick={handleToDoAdd} className='button'>Add</button>
+          <button onClick={handleToDoQuit} className='button'>Remove Completed</button>
+        </div>
       </div>
+      <ToDoList todos={state.items} toggleTodo={toggleTodo} />
+      {
+        state.items.filter((todo) => !todo.completed).length === 0 ? "" :
+          <div className='missingTask'>You have {state.items.filter((todo) => !todo.completed).length} todo's left.</div>
+      }
     </div>
-    <ToDoList todos={state.items} toggleTodo={toggleTodo}/>
- 
-  </div>
   );
 }
 
