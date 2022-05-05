@@ -6,10 +6,11 @@ const ToDoList = ({ todos, toggleTodo }) => {
         <>
 
             <ul className='task-list'>
-
-                <ToDoItem  />
-
-
+                {todos.map((todo) => {
+                    return (
+                        <ToDoItem todo={todo} key={todo.id} toggleTodo={toggleTodo} />
+                    )
+                })}
             </ul>
 
         </>

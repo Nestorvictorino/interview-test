@@ -10,7 +10,18 @@ function App() {
   };
   const [state, dispatch] = useReducer(reducer, initialState);
   const todoTaskRef = useRef();
+  const toggleTodo = (id) => {
+    const newTodos = [...state.items];
+    const todo = newTodos.find((todo) => todo.id === id);
+    todo.completed = !todo.completed
 
+    dispatch({
+      type: "toggle_items",
+      payload: {
+        items: newTodos
+      }
+    })
+  }
 
   return (
     <div className='container'>
@@ -21,7 +32,7 @@ function App() {
         <button  className='button'>Remove Completed</button>
       </div>
     </div>
-    <ToDoList/>
+    <ToDoList todos={state.items} toggleTodo={toggleTodo}/>
  
   </div>
   );

@@ -6,6 +6,12 @@ export default function redurer(state, action) {
         items: state.items.concat(action.payload.items),
       };
     }
+    case "toggle_items": {
+      return {
+        ...state,
+        items: state.items,
+      };  
+    }
     default: {
       return state;
     }
