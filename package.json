@@ -1,6 +1,6 @@
 {
   "homepage":"https://yourusername.github.io/toDoList",
-  "name": "interview-test",
+  "name": "ToDoList",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
