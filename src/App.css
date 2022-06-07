@@ -38,6 +38,11 @@
     box-shadow: 0 2px 10px rgba(139,139,139,.25);
     flex-direction: column;
   }
+  .btns-container{
+    margin-left: 0px;
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 .task-form__input {
